@@ -2,10 +2,11 @@ class Contact
 
   attr_accessor :name, :email
 
-  def initialize(name, email)
+  def initialize(name, email,phonenumber = nil)
     # TODO: assign local variables to instance variables
     @name = name
     @email = email
+    @phonenumber = phonenumber
 
   end
 
@@ -16,10 +17,10 @@ class Contact
 
   ## Class Methods
   class << self
-    def create(name, email)
+    def create(name, email,phonenumber)
       # TODO: Will initialize a contact as well as add it to the list of contacts
      # contact = ContactDatabase.create(@name,@email)
-     Contact.new(@name,@password)
+     Contact.new(@name,@password,@phonenumber)
     end
 
     def find(list,term)
@@ -29,7 +30,7 @@ class Contact
 
       if terms.any?
         terms.each do |row|
-        puts "User id: #{row[0]} Username:#{row[1]} Email: #{row[2]}"
+        puts "User id: #{row[0]} Username:#{row[1]} Email: #{row[2]} Phone #{row[3]}"
         end
         return
       else
@@ -40,7 +41,7 @@ class Contact
     def all(list)
       # TODO: Return the list of contacts, as is
       list.each do |row|
-        puts "User id: #{row[0]} Username:#{row[1]} Email: #{row[2]}"
+        puts "User id: #{row[0]} Username:#{row[1]} Email: #{row[2]} Phone: #{row[3]}"
       end
 
     end
@@ -50,7 +51,7 @@ class Contact
       shown_location = list.select  {|row| row[0] == id}
       if shown_location != nil
           shown_location.each do |row|
-        puts "User id: #{row[0]} Username:#{row[1]} Email: #{row[2]}"
+        puts "User id: #{row[0]} Username:#{row[1]} Email: #{row[2]} Phone #{row[3]}"
       end
       else
         puts "No user found"

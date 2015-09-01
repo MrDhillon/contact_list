@@ -1,11 +1,8 @@
 require 'pry'
 require_relative 'contact'
 require_relative 'contact_database'
-
 # TODO: Implement command line interaction
 # This should be the only file where you use puts and gets
-
-
 def operation
 
   puts "Please input a command or type help for menu"
@@ -27,18 +24,34 @@ def operation
     puts "what is the contact email?"
     email_input = gets.chomp
     email_check = ContactDatabase.all
+
     if Contact.check(email_check,email_input)
       puts "email exisits"
 
       exit
     end
 
-    puts "Would you like to add this to your contacts name:#{name_input} email:#{email_input}? yes or no"
+    puts "Would you like to add a number? yes or no"
+input3 = gets.chomp.downcase
+phone_hash = {}
+while input3 == "yes"
+    puts "What is the 'home' , 'work', 'office'?"
+    type = gets.chomp
+    puts "What is the numer?"
+    number = gets.chomp
+    phone_hash[type] = number
+    puts "Would you like to add another number? yes or no"
+    input3 = gets.chomp.downcase
+    phone_hash
+    binding.pry
+end
+
+    puts "Would you like to add this to your contacts file name:#{name_input} email:#{email_input}? yes or no"
     yes_no = gets.chomp.downcase
 
       if yes_no == "yes"
-        contact = Contact.create(name_input,email_input)
-        ContactDatabase.create(name_input,email_input)
+        contact = Contact.create(name_input,email_input,phone_hash)
+        ContactDatabase.create(name_input,email_input,phone_hash)
       else
         puts "The information was not added"
       end
@@ -55,16 +68,7 @@ def operation
         Contact.find(find_group,number)
   end
 
-  puts " Would you like to add a number?"
 
-  input3 = gets.chomp.downcase
-
-  if input3 == "yes"
-    puts "What is the number?"
-    num = gets.chomp.to_i
-  else
-    puts "Okay no number added."
-  end
 end
 
 

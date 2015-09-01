@@ -12,13 +12,13 @@ class ContactDatabase
   #   new_entry
   # end
 
-  def self.create(x,y)
+  def self.create(x,y,z=nil)
 
        id = CSV.read('contacts.csv').length + 1
 
         CSV.open("contacts.csv", "a") do |csv|
           # id = (csv[0] += 1)
-        csv << ["#{id}","#{x}","#{y}"]
+        csv << ["#{id}","#{x}","#{y}","#{z}"]
 
         end
 

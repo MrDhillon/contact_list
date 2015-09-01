@@ -22,9 +22,19 @@ class Contact
      Contact.new(@name,@password)
     end
 
-    def find(term)
+    def find(list,term)
       # TODO: Will find and return contacts that contain the term in the first name, last name or email
+      terms = list.select {|row| row.include?(term)}
+            binding.pry
 
+      if terms.any?
+        terms.each do |row|
+        puts "User id: #{row[0]} Username:#{row[1]} Email: #{row[2]}"
+        end
+        return
+      else
+        puts "No user found"
+      end
     end
 
     def all(list)
@@ -45,6 +55,15 @@ class Contact
       else
         puts "No user found"
       end
+    end
+
+    def check(list,email)
+    list.each do |row|
+        if row[2].downcase == email.downcase
+          return true
+        end
+      end
+      false
     end
   end
 end

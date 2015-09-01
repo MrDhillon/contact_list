@@ -26,7 +26,14 @@ def operation
     name_input = gets.chomp
     puts "what is the contact email?"
     email_input = gets.chomp
-    puts "Would you like to add this to your contacts name:#{name_input} email:#{email_input}?"
+    email_check = ContactDatabase.all
+    if Contact.check(email_check,email_input)
+      puts "email exisits"
+
+      exit
+    end
+
+    puts "Would you like to add this to your contacts name:#{name_input} email:#{email_input}? yes or no"
     yes_no = gets.chomp.downcase
 
       if yes_no == "yes"
@@ -43,8 +50,21 @@ def operation
   elsif string == "show"
         show_id = ContactDatabase.show
         Contact.show(show_id,number)
+  elsif string == "find"
+        find_group = ContactDatabase.show
+        Contact.find(find_group,number)
   end
 
+  puts " Would you like to add a number?"
+
+  input3 = gets.chomp.downcase
+
+  if input3 == "yes"
+    puts "What is the number?"
+    num = gets.chomp.to_i
+  else
+    puts "Okay no number added."
+  end
 end
 
 

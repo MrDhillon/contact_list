@@ -16,8 +16,6 @@ class ContactDatabase
 
        id = CSV.read('contacts.csv').length + 1
 
-        binding.pry
-
         CSV.open("contacts.csv", "a") do |csv|
           # id = (csv[0] += 1)
         csv << ["#{id}","#{x}","#{y}"]
@@ -46,7 +44,6 @@ class ContactDatabase
     CSV.foreach('contacts.csv') do |row|
         show_arr << row
     end
-    binding.pry
     return show_arr
 
   end
